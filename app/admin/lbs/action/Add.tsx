@@ -109,7 +109,7 @@ function Add({ reload, penyulang }: { reload: Function, penyulang: Array<any> })
                                     autoFocus
                                     className="form-control"
                                     value={penyulangId} onChange={(e) => setPenyulangId(e.target.value)}>
-                                    <option value={''}> Pilih Penyulang</option>
+                                    <option value={''}> -- Pilih --</option>
                                     {penyulang?.map((item: any, i) => (
                                         <option key={i} value={item.id} >{item.nama}</option>
                                     ))}

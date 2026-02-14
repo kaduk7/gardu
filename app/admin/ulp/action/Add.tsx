@@ -93,7 +93,7 @@ function Add({ reload }: { reload: Function }) {
                     <Modal.Body>
                         <div className="row">
                             <div className="mb-3 col-md-12">
-                                <label className="form-label" style={{ color: "black", borderColor: "grey" }}>ULP</label>
+                                <label className="form-label" style={{ color: "black", borderColor: "grey" }}>Unit Layanan Pelanggan</label>
                                 <input
                                     autoFocus
                                     required
