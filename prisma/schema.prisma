@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // atau postgresql
+  url      = env("DATABASE_URL")
+}
+
+model PenggunaTb {
+  id        Int      @id @default(autoincrement())
+  nama      String   @unique
+  usernama  String   @unique
+  ulp       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  UserTb UserTb?
+}
+
+model UserTb {
+  id         Int      @id @default(autoincrement())
+  penggunaId Int      @unique
+  usernama   String   @unique
+  password   String
+  status     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  PenggunaTb PenggunaTb @relation(fields: [penggunaId], references: [id], onDelete: Cascade)
+}
+
+model UlpTb {
+  id        Int      @id @default(autoincrement())
+  nama      String   @unique
+  alamat    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  PenyulangTb PenyulangTb[]
+  PetugasTb   PetugasTb[]
+}
+
+model PenyulangTb {
+  id            Int      @id @default(autoincrement())
+  nama          String
+  ulpId         Int
+  garduinduk    String
+  jenis         String
+  arus          String
+  daerahlayanan String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  UlpTb   UlpTb     @relation(fields: [ulpId], references: [id], onDelete: Cascade)
+  LbsTb   LbsTb[]
+  GarduTb GarduTb[]
+}
+
+model LbsTb {
+  id          Int      @id @default(autoincrement())
+  nama        String
+  penyulangId Int
+  alamat      String
+  acuan       String
+  kordinat    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  PenyulangTb PenyulangTb @relation(fields: [penyulangId], references: [id], onDelete: Cascade)
+}
+
+model GarduTb {
+  id          Int      @id @default(autoincrement())
+  nama        String
+  penyulangId Int
+  alamat      String
+  namatrafo   String
+  ukuran      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  PenyulangTb PenyulangTb @relation(fields: [penyulangId], references: [id], onDelete: Cascade)
+}
+
+model PetugasTb {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  ulpId     Int
+  alamat    String
+  hp        String
+  NIP       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  UlpTb UlpTb @relation(fields: [ulpId], references: [id], onDelete: Cascade)
+}

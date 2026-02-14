@@ -1,0 +1,186 @@
+"use client"
+import { useState, SyntheticEvent, useRef, useEffect } from "react"
+import axios from "axios"
+import Modal from 'react-bootstrap/Modal';
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation"
+import { supabase, supabaseBUCKET } from '@/app/helper'
+
+function Add({ reload, penyulang }: { reload: Function, penyulang: Array<any> }) {
+    const [nama, setNama] = useState("")
+    const [penyulangId, setPenyulangId] = useState("")
+    const [alamat, setAlamat] = useState("")
+    const [acuan, setAcuan] = useState("")
+    const [koordinat1, setKoordinat1] = useState("")
+    const [koordinat2, setKoordinat2] = useState("")
+    const [show, setShow] = useState(false);
+    const router = useRouter()
+    const ref = useRef<HTMLInputElement>(null);
+    const [isLoading, setIsLoading] = useState(false)
+
+    if (isLoading) {
+        Swal.fire({
+            title: "Mohon tunggu!",
+            html: "Sedang mengirim data ke server",
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        })
+    }
+
+    const handleClose = () => {
+        setShow(false);
+        clearForm();
+    }
+
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        ref.current?.focus();
+    }, [])
+
+    function clearForm() {
+        setNama('')
+        setPenyulangId('')
+        setAlamat('')
+        setAcuan('')
+        setKoordinat1('')
+        setKoordinat2('')
+    }
+
+    const handleSubmit = async (e: SyntheticEvent) => {
+        setIsLoading(true)
+        e.preventDefault()
+        const koordinat = `${koordinat1}, ${koordinat2}`;
+        try {
+            const formData = new FormData()
+            formData.append('nama', nama)
+            formData.append('penyulangId', penyulangId)
+            formData.append('acuan', acuan)
+            formData.append('alamat', alamat)
+            formData.append('koordinat', koordinat)
+
+            const xxx = await axios.post(`/admin/api/lbs`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+
+            if (xxx.data.pesan == 'berhasil') {
+                handleClose();
+                setIsLoading(false)
+                clearForm();
+                reload()
+                router.refresh()
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Berhasil Simpan',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    return (
+        <div>
+            <button onClick={handleShow} type="button" className="btn btn-success btn-icon-text">
+                Tambah </button>
+            <Modal
+                dialogClassName="modal-lg"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}>
+                <form onSubmit={handleSubmit}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Tambah Data Lbs</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="mb-3 row">
+                            <label className="col-sm-3 col-form-label" >Penyulang</label>
+                            <div className="col-sm-9">
+                                <select
+                                    required
+                                    autoFocus
+                                    className="form-control"
+                                    value={penyulangId} onChange={(e) => setPenyulangId(e.target.value)}>
+                                    <option value={''}> Pilih Penyulang</option>
+                                    {penyulang?.map((item: any, i) => (
+                                        <option key={i} value={item.id} >{item.nama}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <label className="col-sm-3 col-form-label" >Nama</label>
+                            <div className="col-sm-9">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={nama} onChange={(e) => setNama(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="mb-3 row">
+                            <label className="col-sm-3 col-form-label" >Alamat</label>
+                            <div className="col-sm-9">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={alamat} onChange={(e) => setAlamat(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="mb-3 row">
+                            <label className="col-sm-3 col-form-label" >Acuan</label>
+                            <div className="col-sm-9">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={acuan} onChange={(e) => setAcuan(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <label className="col-sm-3 col-form-label" >Koordinat</label>
+                            <div className="col-sm-4">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={koordinat1} onChange={(e) => setKoordinat1(e.target.value)}
+                                />
+                            </div>
+                            <label className="col-sm-1 col-form-label" > </label>
+                            <div className="col-sm-4">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={koordinat2} onChange={(e) => setKoordinat2(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-danger light" onClick={handleClose}>Close</button>
+                        <button type="submit" className="btn btn-primary light">Simpan</button>
+                    </Modal.Footer>
+                </form>
+            </Modal>
+        </div>
+    )
+}
+
+export default Add
