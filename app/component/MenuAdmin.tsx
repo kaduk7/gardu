@@ -92,21 +92,21 @@ export default function MenuAdmin() {
                                 </svg>
 
                             </div>
-                            <span className="nav-text">Tugas</span>
+                            <span className="nav-text">Gangguan</span>
                         </a>
                         <ul aria-expanded="false" id="master">
-                            <li className="mini-dashboard">Tugas</li>
+                            <li className="mini-dashboard">Gangguan</li>
                             <li>
-                                <Link href="/admin/tambahtugas">Tambah Tugas</Link>
+                                <Link href="/admin/tambahtugas">Trip Penyulang</Link>
                             </li>
                             <li>
-                                <Link href="/admin/pengajuanjobdesk">Verifikasi Tugas</Link>
+                                <Link href="/admin/pengajuanjobdesk">Trafo Kontak</Link>
                             </li>
                             {/* <li>
                                 <Link href="/admin/requesttugas">Request Tugas</Link>
                             </li> */}
                             <li>
-                                <Link href="/admin/jobdeskdone">Data Tugas</Link>
+                                <Link href="/admin/jobdeskdone">Kabel Hilang</Link>
                             </li>
                         </ul>
                     </li>
@@ -132,7 +132,7 @@ export default function MenuAdmin() {
                                 <Link href="/admin/kantor">Setting</Link>
                             </li>
                             <li>
-                                <Link href="/admin/pengumuman">Pengumuman</Link>
+                                <Link href="/admin/pengumuman">Manuver</Link>
                             </li>
                             <li>
                                 <Link href="/master/berita">Berita</Link>

@@ -86,7 +86,7 @@ const Login = () => {
               <div className="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
                 <div className="login-form">
                   <div className="text-center">
-                    <img src="/tema/images/lugu.png" width='300' height='100' className="mb-3" alt="" />
+                    <img src="/tema/images/LogoPLN.png" width='300' height='100' className="mb-3" alt="" />
                     {/* <h3 className="title">Selamat datang di Aplikasi iCerdas</h3> */}
                     <p style={{ color: '#7ca6ff' }}>Selamat datang di Website PLN </p>
                   </div>
