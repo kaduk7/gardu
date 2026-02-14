@@ -74,7 +74,10 @@ export default function MenuAdmin() {
                                 <Link href="/admin/trafo">Data Trafo</Link>
                             </li>
                             <li>
-                                <Link href="/admin/trafo">Data Petugas</Link>
+                                <Link href="/admin/bebantrafo">Beban Trafo</Link>
+                            </li>
+                            <li>
+                                <Link href="/admin/petugas">Data Petugas</Link>
                             </li>
                             
                         </ul>
