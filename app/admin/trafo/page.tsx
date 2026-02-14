@@ -138,8 +138,8 @@ const Trafo = () => {
         name: 'Action',
         cell: (row: any) => (
           <div className="d-flex">
-            <Delete reload={reload} reloadtabel={reloadtabel} idpenyulang={penyulangid}  trafoId={row.id}  />
-            <Update reload={reload} reloadtabel={reloadtabel} idpenyulang={penyulangid}  trafo={row}  />
+            <Delete reload={reload} reloadtabel={reloadtabel} idpenyulang={penyulangid} trafoId={row.id} />
+            <Update reload={reload} reloadtabel={reloadtabel} idpenyulang={penyulangid} trafo={row} />
           </div>
         ),
         width: '150px'
@@ -153,52 +153,69 @@ const Trafo = () => {
         <div className="col-md-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-header">
-              <h1 className="card-title col-md-5 ">Daftar Trafo Gardu</h1>
-              <div className="card-title col-md-3">
-                <div className="row">
-                  <div className="mb-3 col-md-12">
-                    <h6 className="form-label tebalsikit" >Unit Layanan Pelanggan</h6>
+              <div className="container-fluid p-0">
+                <div className="row align-items-end g-3">
+
+                  {/* Judul */}
+                  <div className="col-12 col-md-4">
+                    <h5 className="fw-bold mb-0">Daftar Trafo Gardu</h5>
+                  </div>
+
+                  {/* ULP */}
+                  <div className="col-12 col-md-4">
+                    <label className="form-label fw-semibold">
+                      Unit Layanan Pelanggan
+                    </label>
                     <select
                       required
                       autoFocus
-                      className="form-control"
-                      value={ulpid} onChange={handleulp}>
-                      <option value="" disabled={!!ulpid}>
+                      className="form-select"
+                      value={ulpid}
+                      onChange={handleulp}
+                    >
+                      <option value="" disabled>
                         -- Pilih --
                       </option>
                       {dataulp?.map((item: any, i) => (
-                        <option key={i} value={item.id} >{item.nama}</option>
+                        <option key={i} value={item.id}>
+                          {item.nama}
+                        </option>
                       ))}
                     </select>
                   </div>
-                </div>
-              </div>
-              <div className="card-title col-md-3">
-                <div className="row">
-                  <div className="mb-3 col-md-12">
-                    <h6 className="form-label tebalsikit" >Penyulang</h6>
-                    {ulpid === '' ?
-                      <select disabled
-                        className="form-control">
-                        <option value=""> Menunggu pilih ULP</option>
+
+                  {/* Penyulang */}
+                  <div className="col-12 col-md-4">
+                    <label className="form-label fw-semibold">
+                      Penyulang
+                    </label>
+
+                    {ulpid === '' ? (
+                      <select disabled className="form-select">
+                        <option>Menunggu pilih ULP</option>
                       </select>
-                      :
+                    ) : (
                       <select
-                        className="form-control"
-                        value={penyulangid} onChange={handlepenyulang}>
-                        <option value="" disabled={!!penyulangid}>
+                        className="form-select"
+                        value={penyulangid}
+                        onChange={handlepenyulang}
+                      >
+                        <option value="" disabled>
                           -- Pilih --
                         </option>
                         {datapenyulangterpilih?.map((item: any, i) => (
-                          <option key={i} value={item.id} >{item.nama}</option>
+                          <option key={i} value={item.id}>
+                            {item.nama}
+                          </option>
                         ))}
                       </select>
-                    }
-
+                    )}
                   </div>
+
                 </div>
               </div>
             </div>
+
             <div className="card-body">
               {/* <div className="row mb-3">
                 <div className="col-md-3">
@@ -225,7 +242,7 @@ const Trafo = () => {
                 <>
                   <div className="row mb-3">
                     <div className="col-md-9">
-                      <Add reload={reload}  reloadtabel={reloadtabel} idpenyulang={penyulangid} />
+                      <Add reload={reload} reloadtabel={reloadtabel} idpenyulang={penyulangid} />
                     </div>
                   </div>
                   <DataTable

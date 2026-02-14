@@ -75,11 +75,12 @@ const ULP = () => {
               <h1 className="card-title" >Unit Layanan Pelanggan</h1>
             </div>
             <div className="card-body">
+              
               <div className="row mb-3">
-                <div className="col-md-9">
+                <div className="col-md-9 mb-3">
                   <Add reload={reload} />
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 ">
                   <div className="input-group mb-3  input-success">
                     <span className="input-group-text border-0"><i className="mdi mdi-magnify"></i></span>
                     <input
@@ -114,7 +115,7 @@ const ULP = () => {
                   },
                 }}
               />
-              {dataulp.length > 0 ?
+              {/* {dataulp.length > 0 ?
                 <div className="row mb-3">
                   <div className="col-md-3">
                     <button type='button' className="btn btn-success btn-icon-text">
@@ -137,7 +138,7 @@ const ULP = () => {
                 </div>
                 :
                 null
-              }
+              } */}
             </div>
           </div>
         </div>

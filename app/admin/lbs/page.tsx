@@ -96,7 +96,7 @@ const Lbs = () => {
             </div>
             <div className="card-body">
               <div className="row mb-3">
-                <div className="col-md-9">
+                <div className="col-md-9 mb-3">
                   <Add reload={reload} penyulang={datapenyulang} />
                 </div>
                 <div className="col-md-3">
