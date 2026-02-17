@@ -110,7 +110,7 @@ function Add({ reload }: { reload: Function }) {
 
                         <div className="row  mb-3">
                             <div className="mb-3 col-md-12">
-                                <label className="form-label" style={{ color: "black" }}>Daerah Layanan</label>
+                                <label className="form-label" style={{ color: "black" }}>alamat</label>
                                 <textarea
                                     required
                                     className="form-control"

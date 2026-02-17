@@ -10,6 +10,7 @@ const Superadmin = () => {
   const [nama, setNama] = useState("")
   const [usernama, setUsernama] = useState("")
   const [password, setPassword] = useState("")
+  const [alamat, setAlamat] = useState("")
   const [ulp, setUlp] = useState("")
   const refemail = useRef<HTMLInputElement>(null);
   const router = useRouter()
@@ -39,6 +40,7 @@ const Superadmin = () => {
          setUlp('')
          setPassword('')
          setUsernama('')
+         setAlamat('')
      }
 
   const reload = async () => {
@@ -70,6 +72,7 @@ const Superadmin = () => {
       formData.append('ulp', ulp)
       formData.append('usernama', usernama)
       formData.append('password', password)
+      formData.append('alamat', alamat)
 
       const xxx = await axios.post(`/admin/api/superadmin`, formData, {
         headers: {
@@ -142,6 +145,15 @@ const Superadmin = () => {
                       type="text"
                       className="form-control"
                       value={ulp} onChange={(e) => setUlp(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3 col-md-6">
+                    <label className="form-label" style={{ color: 'black' }}>Alamat</label>
+                    <input
+                      required
+                      type="text"
+                      className="form-control"
+                      value={alamat} onChange={(e) => setAlamat(e.target.value)}
                     />
                   </div>
                 </div>

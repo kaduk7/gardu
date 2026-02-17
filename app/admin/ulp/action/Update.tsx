@@ -111,7 +111,7 @@ function Update({ ulp, reload }: { ulp: UlpTb, reload: Function }) {
 
                         <div className="row  mb-3">
                             <div className="mb-3 col-md-12">
-                                <label className="form-label" style={{ color: "black" }}>Daerah Layanan</label>
+                                <label className="form-label" style={{ color: "black" }}>Alamat</label>
                                 <textarea
                                     className="form-control"
                                     style={{ backgroundColor: 'white', color: "black", borderColor: "grey" }}

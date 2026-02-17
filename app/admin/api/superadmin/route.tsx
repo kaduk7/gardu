@@ -24,6 +24,7 @@ export const POST = async (request: Request) => {
             nama: String(formData.get('nama')),
             ulp: String(formData.get('ulp')),
             usernama: String(formData.get('usernama')),
+            alamat: String(formData.get('alamat')),
             UserTb: {
                 create: {
                     usernama: String(formData.get('usernama')),
@@ -36,6 +37,7 @@ export const POST = async (request: Request) => {
             UserTb: true
         }
     })
+    
     return NextResponse.json({ pesan: 'berhasil' })
 
 }
